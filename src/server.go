@@ -21,7 +21,7 @@ import (
 func main() {
 	// Get environment variables
 	newRelicAppName := os.Getenv("SPOTIFY_SLACK_APP_NEW_RELIC_APP_NAME")
-	newRelicLicense := os.Getenv("SPOTIFY_SLACK_APP_NEW_RELIC_LICENSE")
+	newRelicLicense := os.Getenv("NEW_RELIC_LICENSE_KEY")
 	databaseURL := os.Getenv("SPOTIFY_SLACK_APP_DATABASE_URL")
 	slackAuthURL := os.Getenv("SPOTIFY_SLACK_APP_SLACK_AUTH_URL")
 	spotifyRedirectURL := os.Getenv("SPOTIFY_SLACK_APP_SPOTIFY_REDIRECT_URL")
