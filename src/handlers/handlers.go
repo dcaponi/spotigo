@@ -137,6 +137,7 @@ func (h handlers) SlackCallbackHandler(w http.ResponseWriter, r *http.Request) {
 	err = json.Unmarshal(body, &slackAuthResponse)
 	if err != nil {
 		fmt.Println(err)
+		fmt.Println("slack auth json marshal error")
 		appError := app_error.SlackAuthBadRequest
 		h.writeResponse(w, appError.Error(), appError.Status())
 	}
