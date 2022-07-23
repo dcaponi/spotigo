@@ -148,6 +148,6 @@ func (h handlers) SlackCallbackHandler(w http.ResponseWriter, r *http.Request) {
 	http.SetCookie(w, &cookieSlack)
 
 	spotifyAuthURL := h.spotifyAuthenticator.AuthURL(h.spotifyState)
-
+	fmt.Println("HERE!")
 	http.Redirect(w, r, spotifyAuthURL, http.StatusSeeOther)
 }
