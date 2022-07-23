@@ -104,6 +104,7 @@ func (h handlers) SlackCallbackHandler(w http.ResponseWriter, r *http.Request) {
 	resp, err := http.Post(h.slackAuthURL, "application/x-www-form-urlencoded", strings.NewReader(requestBody.Encode()))
 	if err != nil {
 		fmt.Println(err)
+		fmt.Println("error posting to slack auth")
 		appError := app_error.SlackAuthBadRequest
 		h.writeResponse(w, appError.Error(), appError.Status())
 	}
@@ -113,6 +114,7 @@ func (h handlers) SlackCallbackHandler(w http.ResponseWriter, r *http.Request) {
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		fmt.Println(err)
+		fmt.Println("error reading slack auth response")
 		appError := app_error.SlackAuthBadRequest
 		h.writeResponse(w, appError.Error(), appError.Status())
 	}
