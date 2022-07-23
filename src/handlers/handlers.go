@@ -61,7 +61,7 @@ func (h handlers) HealthHandler(w http.ResponseWriter, r *http.Request) {
 
 func (h handlers) SpotifyCallbackHandler(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
-
+	fmt.Println("Start spotify handle")
 	userID, err := r.Cookie("user_id")
 	if err != nil {
 		fmt.Println(err)
@@ -148,6 +148,6 @@ func (h handlers) SlackCallbackHandler(w http.ResponseWriter, r *http.Request) {
 	http.SetCookie(w, &cookieSlack)
 
 	spotifyAuthURL := h.spotifyAuthenticator.AuthURL(h.spotifyState)
-	fmt.Println("HERE!", spotifyAuthURL)
+
 	http.Redirect(w, r, spotifyAuthURL, http.StatusSeeOther)
 }
