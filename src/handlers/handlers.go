@@ -103,6 +103,8 @@ func (h handlers) SlackCallbackHandler(w http.ResponseWriter, r *http.Request) {
 	requestBody.Set("client_secret", h.slackClientSecret)
 
 	slackTokenEndpoint.RawQuery = requestBody.Encode()
+
+	fmt.Println("request to ", slackTokenEndpoint.String())
 	resp, err := http.Get(slackTokenEndpoint.String())
 	if err != nil {
 		fmt.Println(err)
