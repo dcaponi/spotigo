@@ -100,7 +100,7 @@ func (h handlers) SlackCallbackHandler(w http.ResponseWriter, r *http.Request) {
 	requestBody.Set("code", slackCode)
 	requestBody.Set("client_id", h.slackClientID)
 	requestBody.Set("client_secret", h.slackClientSecret)
-
+	fmt.Println(requestBody, requestBody.Encode(), strings.NewReader(requestBody.Encode()))
 	resp, err := http.Post(h.slackAuthURL, "application/x-www-form-urlencoded", strings.NewReader(requestBody.Encode()))
 	if err != nil {
 		fmt.Println(err)
