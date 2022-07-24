@@ -75,8 +75,6 @@ func (s services) ChangeUserStatus(ctx context.Context) error {
 
 			if canUpdateStatus {
 				songName := player.Item.Name
-				fmt.Println("listening to ", songName)
-
 				slackStatus := songName + " - " + player.Item.Artists[0].Name
 				if len(slackStatus) > 100 {
 					extraChars := len(slackStatus) - 100 + 3
@@ -86,6 +84,7 @@ func (s services) ChangeUserStatus(ctx context.Context) error {
 
 				err = slackApi.SetUserCustomStatusWithUser(user.SlackUserID, slackStatus, ":spotify:", 0)
 				if err != nil {
+					fmt.Println("unavle to set from clean status")
 					fmt.Printf("Error slack set user custom status: %s\n", err)
 				}
 				return
