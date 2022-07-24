@@ -7,7 +7,6 @@ import (
 	"log"
 	"net/http"
 	"net/url"
-	"strings"
 	"time"
 
 	"github.com/dcaponi/spotigo/src/app_error"
@@ -96,12 +95,15 @@ func (h handlers) SpotifyCallbackHandler(w http.ResponseWriter, r *http.Request)
 func (h handlers) SlackCallbackHandler(w http.ResponseWriter, r *http.Request) {
 	slackCode := r.URL.Query().Get("code")
 
+	slackTokenEndpoint, _ := url.Parse("https://slack.com/api/oauth.v2.access")
+
 	requestBody := url.Values{}
 	requestBody.Set("code", slackCode)
 	requestBody.Set("client_id", h.slackClientID)
 	requestBody.Set("client_secret", h.slackClientSecret)
-	fmt.Println(requestBody, requestBody.Encode(), strings.NewReader(requestBody.Encode()))
-	resp, err := http.Post(h.slackAuthURL, "application/x-www-form-urlencoded", strings.NewReader(requestBody.Encode()))
+
+	slackTokenEndpoint.RawQuery = requestBody.Encode()
+	resp, err := http.Get(slackTokenEndpoint.String())
 	if err != nil {
 		fmt.Println(err)
 		fmt.Println("error posting to slack auth")
