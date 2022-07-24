@@ -52,7 +52,7 @@ func main() {
 
 	// Setup cronjob for updating status
 	c := cron.New(cron.WithSeconds())
-	c.AddFunc("@every 10s", func() { services.ChangeUserStatus(context.Background()) })
+	c.AddFunc("@every 3s", func() { services.ChangeUserStatus(context.Background()) })
 	c.Start()
 
 	// Add 3p callback handlers
