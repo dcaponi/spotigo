@@ -84,8 +84,14 @@ func (s services) ChangeUserStatus(ctx context.Context) error {
 
 				err = slackApi.SetUserCustomStatusWithUser(user.SlackUserID, slackStatus, ":spotify:", 0)
 				if err != nil {
-					fmt.Println("unavle to set from clean status")
-					fmt.Printf("Error slack set user custom status: %s\n", err)
+					if fmt.Sprintf("%s", err) == "profile_status_set_failed_not_valid_emoji" {
+						err = slackApi.SetUserCustomStatusWithUser(user.SlackUserID, slackStatus, ":headphones:", 0)
+						if err != nil {
+							fmt.Printf("Error slack set user custom status: %s\n", err)
+						}
+					} else {
+						fmt.Printf("Error slack set user custom status: %s\n", err)
+					}
 				}
 				return
 			}
