@@ -67,8 +67,8 @@ func (s services) ChangeUserStatus(ctx context.Context) error {
 				return
 			}
 
-			canUpdateStatus := player.Playing && (profile.StatusEmoji == ":spotify:" || profile.StatusEmoji == "")
-			canClearStatus := !player.Playing && profile.StatusEmoji == ":spotify:"
+			canUpdateStatus := player.Playing && (profile.StatusEmoji == ":spotify:" || profile.StatusEmoji == ":headphones:" || profile.StatusEmoji == "")
+			canClearStatus := !player.Playing && (profile.StatusEmoji == ":spotify:" || profile.StatusEmoji == ":headphones:")
 			if !canUpdateStatus && !canClearStatus {
 				return
 			}
