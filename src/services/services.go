@@ -75,6 +75,8 @@ func (s services) ChangeUserStatus(ctx context.Context) error {
 
 			if canUpdateStatus {
 				songName := player.Item.Name
+				fmt.Println("listening to ", songName)
+
 				slackStatus := songName + " - " + player.Item.Artists[0].Name
 				if len(slackStatus) > 100 {
 					extraChars := len(slackStatus) - 100 + 3
